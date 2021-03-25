@@ -1,5 +1,6 @@
 // import fs from 'fs';
-import { CSVFileReader } from './CSVFileReader'
+import { CSVFileReader } from './CSVFileReader';
+import { MatchResult } from './MatchResult';
 
 // /* standard JS implementation */
 // const matches = fs
@@ -12,10 +13,10 @@ import { CSVFileReader } from './CSVFileReader'
 //   });
 
 /* implementation using class */
-const matches = new CSVFileReader('football.csv')
+const matches = new CSVFileReader('football.csv');
 matches.read();
 
-console.table(matches.data)
+console.table(matches.data);
 
 /* draw variable may be marked as unused and tempting for other engineers to delete */
 // const homeWin = 'H';
@@ -29,13 +30,13 @@ console.table(matches.data)
 //   Draw: 'D',
 // };
 
-/* the TypeScript alternative is to use an enum */
-/* this signals to other engineers that it is a collection of related values */
-enum MatchResult {
-  HomeWin = 'H',
-  AwayWin = 'A',
-  Draw = 'D'
-}
+// /* the TypeScript alternative is to use an enum */
+// /* this signals to other engineers that it is a collection of related values */
+// enum MatchResult {
+//   HomeWin = 'H',
+//   AwayWin = 'A',
+//   Draw = 'D'
+// }
 
 let manUtdWins = 0;
 

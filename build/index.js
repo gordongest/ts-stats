@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // import fs from 'fs';
 const CSVFileReader_1 = require("./CSVFileReader");
+const MatchResult_1 = require("./MatchResult");
 // /* standard JS implementation */
 // const matches = fs
 //   .readFileSync('football.csv', {
@@ -25,20 +26,19 @@ console.table(matches.data);
 //   AwayWin: 'A',
 //   Draw: 'D',
 // };
-/* the TypeScript alternative is to use an enum */
-/* this signals to other engineers that it is a collection of related values */
-var MatchResult;
-(function (MatchResult) {
-    MatchResult["HomeWin"] = "H";
-    MatchResult["AwayWin"] = "A";
-    MatchResult["Draw"] = "D";
-})(MatchResult || (MatchResult = {}));
+// /* the TypeScript alternative is to use an enum */
+// /* this signals to other engineers that it is a collection of related values */
+// enum MatchResult {
+//   HomeWin = 'H',
+//   AwayWin = 'A',
+//   Draw = 'D'
+// }
 let manUtdWins = 0;
 matches.data.forEach((match) => {
-    if (match[1] === 'Man United' && match[5] === MatchResult.HomeWin) {
+    if (match[1] === 'Man United' && match[5] === MatchResult_1.MatchResult.HomeWin) {
         manUtdWins++;
     }
-    else if (match[2] === 'Man United' && match[5] === MatchResult.AwayWin) {
+    else if (match[2] === 'Man United' && match[5] === MatchResult_1.MatchResult.AwayWin) {
         manUtdWins++;
     }
 });
