@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// import fs from 'fs';
-const CSVFileReader_1 = require("./CSVFileReader");
 const MatchResult_1 = require("./MatchResult");
+const MatchReader_1 = require("./MatchReader");
 // /* standard JS implementation */
 // const matches = fs
 //   .readFileSync('football.csv', {
@@ -13,7 +12,7 @@ const MatchResult_1 = require("./MatchResult");
 //     return row.split(',');
 //   });
 /* implementation using class */
-const matches = new CSVFileReader_1.CSVFileReader('football.csv');
+const matches = new MatchReader_1.MatchReader('football.csv');
 matches.read();
 // console.table(matches.data);
 /* draw variable may be marked as unused and tempting for other engineers to delete */

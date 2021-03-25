@@ -1,6 +1,7 @@
 // import fs from 'fs';
 import { CSVFileReader } from './CSVFileReader';
 import { MatchResult } from './MatchResult';
+import { MatchReader } from './MatchReader'
 
 // /* standard JS implementation */
 // const matches = fs
@@ -13,7 +14,7 @@ import { MatchResult } from './MatchResult';
 //   });
 
 /* implementation using class */
-const matches = new CSVFileReader('football.csv');
+const matches = new MatchReader('football.csv');
 matches.read();
 
 // console.table(matches.data);

@@ -1,0 +1,44 @@
+// repeated code
+const addOne = (a: number): number => {
+  return a + 1;
+};
+const addTwo = (a: number): number => {
+  return a + 2;
+};
+const addThree = (a: number): number => {
+  return a + 3;
+};
+
+// reusable code
+const add = (a: number, b: number): number => {
+  return a + b;
+};
+
+// repeated classes
+// class HoldNumber {
+//   data: number;
+// }
+
+// const holdNumber = new HoldNumber(0);
+// holdNumber.data = 123;
+
+// class HoldString {
+//   data: string;
+// }
+
+// const holdString = new HoldString('');
+// holdString.data = 'abc';
+
+// generic
+class HoldAnything<TypeOfData> {
+  data: TypeOfData;
+}
+
+const holdBoolean = new HoldAnything<boolean>();
+holdBoolean.data = false;
+
+const holdString = new HoldAnything<string>();
+holdString.data = 'abc';
+
+const holdNumber = new HoldAnything<number>();
+holdNumber.data = 123;
