@@ -16,7 +16,7 @@ import { MatchResult } from './MatchResult';
 const matches = new CSVFileReader('football.csv');
 matches.read();
 
-console.table(matches.data);
+// console.table(matches.data);
 
 /* draw variable may be marked as unused and tempting for other engineers to delete */
 // const homeWin = 'H';

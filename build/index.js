@@ -15,7 +15,7 @@ const MatchResult_1 = require("./MatchResult");
 /* implementation using class */
 const matches = new CSVFileReader_1.CSVFileReader('football.csv');
 matches.read();
-console.table(matches.data);
+// console.table(matches.data);
 /* draw variable may be marked as unused and tempting for other engineers to delete */
 // const homeWin = 'H';
 // const awayWin = 'A';
