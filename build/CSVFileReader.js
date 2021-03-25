@@ -28,7 +28,7 @@ class CSVFileReader {
                 Number(row[3]),
                 Number(row[4]),
                 row[5],
-                row[6]
+                row[6],
             ];
         });
     }
