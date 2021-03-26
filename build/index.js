@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // import fs from 'fs';
-// import { CSVFileReader } from './CSVFileReader';
+const CSVFileReader_1 = require("./CSVFileReader");
 const MatchResult_1 = require("./MatchResult");
-const MatchReader_1 = require("./inheritance/MatchReader");
+const MatchReader_1 = require("./MatchReader");
 // /* standard JS implementation */
 // const matches = fs
 //   .readFileSync('football.csv', {
@@ -14,8 +14,15 @@ const MatchReader_1 = require("./inheritance/MatchReader");
 //     return row.split(',');
 //   });
 /* implementation using class */
-const matches = new MatchReader_1.MatchReader('football.csv');
-matches.read();
+// const matches = new MatchReader('football.csv');
+// matches.read();
+/* implementation using interface */
+/* create instance of data reader */
+const reader = new CSVFileReader_1.CSVFileReader('football.csv');
+/* create instance of MatchReader, pass it data reader */
+const matchReader = new MatchReader_1.MatchReader(reader);
+matchReader.load();
+console.table(matchReader.data);
 // console.table(matches.data);
 /* draw variable may be marked as unused and tempting for other engineers to delete */
 // const homeWin = 'H';
@@ -35,7 +42,7 @@ matches.read();
 //   Draw = 'D'
 // }
 let manUtdWins = 0;
-matches.data.forEach((match) => {
+matchReader.data.forEach((match) => {
     if (match[1] === 'Man United' && match[5] === MatchResult_1.MatchResult.HomeWin) {
         manUtdWins++;
     }
@@ -43,4 +50,4 @@ matches.data.forEach((match) => {
         manUtdWins++;
     }
 });
-console.log(`The Reds won ${manUtdWins} games`);
+console.log(`The Red Devils won ${manUtdWins} games`);

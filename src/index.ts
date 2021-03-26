@@ -1,7 +1,7 @@
 // import fs from 'fs';
-// import { CSVFileReader } from './CSVFileReader';
+import { CSVFileReader } from './CSVFileReader';
 import { MatchResult } from './MatchResult';
-import { MatchReader } from './inheritance/MatchReader'
+import { MatchReader } from './MatchReader';
 
 // /* standard JS implementation */
 // const matches = fs
@@ -14,8 +14,16 @@ import { MatchReader } from './inheritance/MatchReader'
 //   });
 
 /* implementation using class */
-const matches = new MatchReader('football.csv');
-matches.read();
+// const matches = new MatchReader('football.csv');
+// matches.read();
+
+/* implementation using interface */
+/* create instance of data reader */
+const reader = new CSVFileReader('football.csv');
+/* create instance of MatchReader, pass it data reader */
+const matchReader = new MatchReader(reader);
+matchReader.load();
+console.table(matchReader.data);
 
 // console.table(matches.data);
 
@@ -41,7 +49,7 @@ matches.read();
 
 let manUtdWins = 0;
 
-matches.data.forEach((match): void => {
+matchReader.data.forEach((match): void => {
   if (match[1] === 'Man United' && match[5] === MatchResult.HomeWin) {
     manUtdWins++;
   } else if (match[2] === 'Man United' && match[5] === MatchResult.AwayWin) {
@@ -49,4 +57,4 @@ matches.data.forEach((match): void => {
   }
 });
 
-console.log(`The Reds won ${manUtdWins} games`);
+console.log(`The Red Devils won ${manUtdWins} games`);
