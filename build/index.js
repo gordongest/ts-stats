@@ -6,7 +6,7 @@ const CSVFileReader_1 = require("./CSVFileReader");
 const MatchReader_1 = require("./MatchReader");
 const Summary_1 = require("./Summary");
 const WinsAnalysis_1 = require("./analyzers/WinsAnalysis");
-const ConsoleReport_1 = require("./reporters/ConsoleReport");
+const HTMLReport_1 = require("./reporters/HTMLReport");
 // /* STANDARD JS IMPLEMENTATION */
 // const matches = fs
 //   .readFileSync('football.csv', {
@@ -109,6 +109,6 @@ const matchData = matchReader.data;
 // console.timeEnd('Compositional pattern')
 /* refactored to be more concise */
 const summary = (club) => {
-    return new Summary_1.Summary(new WinsAnalysis_1.WinsAnalysis(club), new ConsoleReport_1.ConsoleReport());
+    return new Summary_1.Summary(new WinsAnalysis_1.WinsAnalysis(club), new HTMLReport_1.HTMLReport());
 };
 summary('Liverpool').buildAndReport(matchData);

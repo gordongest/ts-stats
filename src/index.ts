@@ -5,6 +5,7 @@ import { MatchReader } from './MatchReader';
 import { Summary } from './Summary';
 import { WinsAnalysis } from './analyzers/WinsAnalysis';
 import { ConsoleReport } from './reporters/ConsoleReport';
+import { HTMLReport } from './reporters/HTMLReport';
 
 // /* STANDARD JS IMPLEMENTATION */
 
@@ -146,9 +147,7 @@ const matchData = matchReader.data;
 /* refactored to be more concise */
 
 const summary = (club: string): Summary => {
-  return new Summary(
-    new WinsAnalysis(club),
-    new ConsoleReport());
+  return new Summary(new WinsAnalysis(club), new HTMLReport());
 };
 
-summary('Liverpool').buildAndReport(matchData)
+summary('Liverpool').buildAndReport(matchData);
