@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // import fs from 'fs';
-const CSVFileReader_1 = require("./CSVFileReader");
+// import { CSVFileReader } from './CSVFileReader';
 // import { MatchResult } from './MatchResult';
 const MatchReader_1 = require("./MatchReader");
 const Summary_1 = require("./Summary");
 const WinsAnalysis_1 = require("./analyzers/WinsAnalysis");
+const ConsoleReport_1 = require("./reporters/ConsoleReport");
 const HTMLReport_1 = require("./reporters/HTMLReport");
 // /* STANDARD JS IMPLEMENTATION */
 // const matches = fs
@@ -47,9 +48,10 @@ const HTMLReport_1 = require("./reporters/HTMLReport");
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /* INTERFACE IMPLEMENTATION */
 /* create instance of csv reader, pass it filepath */
-const csvReader = new CSVFileReader_1.CSVFileReader('football.csv');
+// const csvReader = new CSVFileReader('football.csv');
 /* create instance of MatchReader, pass it data reader */
-const matchReader = new MatchReader_1.MatchReader(csvReader);
+// const matchReader = new MatchReader(csvReader);
+const matchReader = MatchReader_1.MatchReader.readFromCsv('football.csv');
 /* call load method */
 matchReader.load();
 /* data is available */
@@ -101,14 +103,19 @@ matchReader.load();
 // /* ~0.1ms */
 /* COMPOSITIONAL IMPLEMENTATION */
 const matchData = matchReader.data;
-// const analysis = new WinsAnalysis('Leeds');
-// const report = new ConsoleReport();
-// const manUtdWins = new Summary(analysis, report);
-// console.time('Compositional pattern')
-// manUtdWins.buildAndReport(matchData);
-// console.timeEnd('Compositional pattern')
+const analysis = new WinsAnalysis_1.WinsAnalysis('Chelsea');
+const report = new ConsoleReport_1.ConsoleReport();
+const chelseaWins = new Summary_1.Summary(analysis, report);
+chelseaWins.buildAndReport(matchData);
 /* refactored to be more concise */
-const summary = (club) => {
+const consoleSummary = (club) => {
+    return new Summary_1.Summary(new WinsAnalysis_1.WinsAnalysis(club), new ConsoleReport_1.ConsoleReport());
+};
+consoleSummary('Tottenham').buildAndReport(matchData);
+const htmlSummary = (club) => {
     return new Summary_1.Summary(new WinsAnalysis_1.WinsAnalysis(club), new HTMLReport_1.HTMLReport());
 };
-summary('Liverpool').buildAndReport(matchData);
+htmlSummary('West Ham').buildAndReport(matchData);
+/* USING STATIC METHODS */
+Summary_1.Summary.Console('Southampton', matchData);
+Summary_1.Summary.HTML('Arsenal', matchData);

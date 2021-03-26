@@ -1,5 +1,5 @@
 // import fs from 'fs';
-import { CSVFileReader } from './CSVFileReader';
+// import { CSVFileReader } from './CSVFileReader';
 // import { MatchResult } from './MatchResult';
 import { MatchReader } from './MatchReader';
 import { Summary } from './Summary';
@@ -60,10 +60,11 @@ import { HTMLReport } from './reporters/HTMLReport';
 /* INTERFACE IMPLEMENTATION */
 
 /* create instance of csv reader, pass it filepath */
-const csvReader = new CSVFileReader('football.csv');
+// const csvReader = new CSVFileReader('football.csv');
 
 /* create instance of MatchReader, pass it data reader */
-const matchReader = new MatchReader(csvReader);
+// const matchReader = new MatchReader(csvReader);
+const matchReader = MatchReader.readFromCsv('football.csv')
 
 /* call load method */
 matchReader.load();
@@ -136,18 +137,27 @@ matchReader.load();
 
 const matchData = matchReader.data;
 
-// const analysis = new WinsAnalysis('Leeds');
-// const report = new ConsoleReport();
-// const manUtdWins = new Summary(analysis, report);
+const analysis = new WinsAnalysis('Chelsea');
+const report = new ConsoleReport();
+const chelseaWins = new Summary(analysis, report);
 
-// console.time('Compositional pattern')
-// manUtdWins.buildAndReport(matchData);
-// console.timeEnd('Compositional pattern')
+chelseaWins.buildAndReport(matchData);
 
 /* refactored to be more concise */
 
-const summary = (club: string): Summary => {
+const consoleSummary = (club: string): Summary => {
+  return new Summary(new WinsAnalysis(club), new ConsoleReport());
+};
+
+consoleSummary('Tottenham').buildAndReport(matchData);
+
+const htmlSummary = (club: string): Summary => {
   return new Summary(new WinsAnalysis(club), new HTMLReport());
 };
 
-summary('Liverpool').buildAndReport(matchData);
+htmlSummary('West Ham').buildAndReport(matchData);
+
+/* USING STATIC METHODS */
+
+Summary.Console('Southampton', matchData)
+Summary.HTML('Arsenal', matchData)
