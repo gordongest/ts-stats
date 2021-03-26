@@ -1,7 +1,7 @@
 // import fs from 'fs';
-import { CSVFileReader } from './CSVFileReader';
+// import { CSVFileReader } from './CSVFileReader';
 import { MatchResult } from './MatchResult';
-import { MatchReader } from './MatchReader'
+import { MatchReader } from './inheritance/MatchReader'
 
 // /* standard JS implementation */
 // const matches = fs
@@ -41,7 +41,7 @@ matches.read();
 
 let manUtdWins = 0;
 
-matches.data.forEach((match: string[]): void => {
+matches.data.forEach((match): void => {
   if (match[1] === 'Man United' && match[5] === MatchResult.HomeWin) {
     manUtdWins++;
   } else if (match[2] === 'Man United' && match[5] === MatchResult.AwayWin) {

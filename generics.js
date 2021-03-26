@@ -26,6 +26,9 @@ const add = (a, b) => {
 // holdString.data = 'abc';
 // generic
 class HoldAnything {
+    add(a) {
+        return a;
+    }
 }
 const holdBoolean = new HoldAnything();
 holdBoolean.data = false;
@@ -33,3 +36,4 @@ const holdString = new HoldAnything();
 holdString.data = 'abc';
 const holdNumber = new HoldAnything();
 holdNumber.data = 123;
+holdNumber.add(10);

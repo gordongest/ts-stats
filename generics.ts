@@ -30,8 +30,13 @@ const add = (a: number, b: number): number => {
 // holdString.data = 'abc';
 
 // generic
-class HoldAnything<TypeOfData> {
-  data: TypeOfData;
+class HoldAnything<T> {
+  // T = TypeOfData
+  data: T;
+
+  add(a: T): T {
+    return a;
+  }
 }
 
 const holdBoolean = new HoldAnything<boolean>();
@@ -42,3 +47,4 @@ holdString.data = 'abc';
 
 const holdNumber = new HoldAnything<number>();
 holdNumber.data = 123;
+holdNumber.add(10)
