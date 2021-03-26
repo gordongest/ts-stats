@@ -50,17 +50,41 @@ const matchReader = new MatchReader_1.MatchReader(csvReader);
 /* call load method */
 matchReader.load();
 /* data is available */
-console.table(matchReader.data);
+// console.table(matchReader.data);
 // ^^  NOTE: composition pattern, CSVFileReader satisfies interface 'DataReader'
 //     MatchReader could also accept APIReader, as long as it complies to interface
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-let manUtdWins = 0;
-matchReader.data.forEach((match) => {
-    if (match[1] === 'Man United' && match[5] === MatchResult_1.MatchResult.HomeWin) {
-        manUtdWins++;
-    }
-    else if (match[2] === 'Man United' && match[5] === MatchResult_1.MatchResult.AwayWin) {
-        manUtdWins++;
-    }
-});
-console.log(`The Red Devils won ${manUtdWins} games`);
+/* IMPERATIVE COUNTER */
+const imperativeWins = (club) => {
+    let wins = 0;
+    matchReader.data.forEach((match) => {
+        if (match[1] === club && match[5] === MatchResult_1.MatchResult.HomeWin) {
+            wins++;
+        }
+        else if (match[2] === club && match[5] === MatchResult_1.MatchResult.AwayWin) {
+            wins++;
+        }
+    });
+    return wins;
+};
+// console.log('imperative:', imperativeWins('Man United'));
+/* FUNCTIONAL COUNTER */
+const functionalWins = (club) => matchReader.data.filter((match) => {
+    return ((match[1] === club && match[5] === MatchResult_1.MatchResult.HomeWin) ||
+        (match[2] === club && match[5] === MatchResult_1.MatchResult.AwayWin));
+}).length;
+// console.log('functional:', functionalWins('Man United'));
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+const printWins = (club, winCounter) => {
+    const wins = winCounter(club);
+    console.log(`${club} won ${wins} games`);
+};
+/* redundant after refactor */
+// const clubWins = (club: string): number => functionalWins(club);
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+let club = 'Man United';
+printWins(club, imperativeWins);
+club = 'Liverpool';
+printWins(club, functionalWins);
+club = 'Southampton';
+printWins(club, functionalWins);
