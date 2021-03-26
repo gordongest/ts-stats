@@ -26,14 +26,18 @@ const add = (a, b) => {
 // holdString.data = 'abc';
 // generic
 class HoldAnything {
+    // T = TypeOfData
+    constructor(data) {
+        this.data = data;
+    }
     add(a) {
         return a;
     }
 }
-const holdBoolean = new HoldAnything();
+const holdBoolean = new HoldAnything(true);
 holdBoolean.data = false;
-const holdString = new HoldAnything();
+const holdString = new HoldAnything('def');
 holdString.data = 'abc';
-const holdNumber = new HoldAnything();
+const holdNumber = new HoldAnything(0);
 holdNumber.data = 123;
 holdNumber.add(10);

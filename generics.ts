@@ -32,19 +32,19 @@ const add = (a: number, b: number): number => {
 // generic
 class HoldAnything<T> {
   // T = TypeOfData
-  data: T;
+  constructor(public data: T) {}
 
   add(a: T): T {
     return a;
   }
 }
 
-const holdBoolean = new HoldAnything<boolean>();
+const holdBoolean = new HoldAnything<boolean>(true);
 holdBoolean.data = false;
 
-const holdString = new HoldAnything<string>();
+const holdString = new HoldAnything<string>('def');
 holdString.data = 'abc';
 
-const holdNumber = new HoldAnything<number>();
+const holdNumber = new HoldAnything<number>(0);
 holdNumber.data = 123;
-holdNumber.add(10)
+holdNumber.add(10);
