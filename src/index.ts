@@ -1,9 +1,12 @@
 // import fs from 'fs';
 import { CSVFileReader } from './CSVFileReader';
-import { MatchResult } from './MatchResult';
+// import { MatchResult } from './MatchResult';
 import { MatchReader } from './MatchReader';
+import { Summary } from './Summary';
+import { WinsAnalysis } from './analyzers/WinsAnalysis';
+import { ConsoleReport } from './reporters/ConsoleReport';
 
-// /* standard JS implementation */
+// /* STANDARD JS IMPLEMENTATION */
 
 // const matches = fs
 //   .readFileSync('football.csv', {
@@ -38,7 +41,7 @@ import { MatchReader } from './MatchReader';
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/* implementation using class inheritance */
+/* CLASS INHERITANCE IMPLEMENTATION */
 
 /* create instance of MatchReader, pass it filepath */
 // const matches = new MatchReader('football.csv');
@@ -53,7 +56,7 @@ import { MatchReader } from './MatchReader';
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/* implementation using interface */
+/* INTERFACE IMPLEMENTATION */
 
 /* create instance of csv reader, pass it filepath */
 const csvReader = new CSVFileReader('football.csv');
@@ -67,8 +70,8 @@ matches.load();
 /* data is available */
 // console.table(matchReader.data);
 
-// ^^  NOTE: composition pattern, CSVFileReader satisfies interface 'DataReader'
-//     MatchReader could also accept APIReader, as long as it complies to interface
+// ^^  NOTE: CSVFileReader satisfies interface 'DataReader'
+//     MatchReader could also accept APIReader/HTMLReader, etc, as long as it complies to interface
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -113,7 +116,6 @@ matches.load();
 //   console.log(`${club} won ${wins} games`);
 // };
 
-
 // // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // let club: string = 'Man United';
@@ -128,3 +130,15 @@ matches.load();
 // printWins(club, functionalWins);
 // console.timeEnd('Functional time')
 // /* ~0.1ms */
+
+/* COMPOSITIONAL IMPLEMENTATION */
+
+const analysis = new WinsAnalysis('Leeds');
+const report = new ConsoleReport();
+const matchData = matches.data;
+
+const manUtdWins = new Summary(analysis, report);
+
+console.time('Compositional pattern')
+manUtdWins.buildAndReport(matchData);
+console.timeEnd('Compositional pattern')

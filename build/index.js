@@ -2,8 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // import fs from 'fs';
 const CSVFileReader_1 = require("./CSVFileReader");
+// import { MatchResult } from './MatchResult';
 const MatchReader_1 = require("./MatchReader");
-// /* standard JS implementation */
+const Summary_1 = require("./Summary");
+const WinsAnalysis_1 = require("./analyzers/WinsAnalysis");
+const ConsoleReport_1 = require("./reporters/ConsoleReport");
+// /* STANDARD JS IMPLEMENTATION */
 // const matches = fs
 //   .readFileSync('football.csv', {
 //     encoding: 'utf-8',
@@ -31,7 +35,7 @@ const MatchReader_1 = require("./MatchReader");
 //   Draw = 'D'
 // }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/* implementation using class inheritance */
+/* CLASS INHERITANCE IMPLEMENTATION */
 /* create instance of MatchReader, pass it filepath */
 // const matches = new MatchReader('football.csv');
 /* call read method
@@ -41,7 +45,7 @@ const MatchReader_1 = require("./MatchReader");
 // console.log(matches.data)
 //  ^^ NOTE: MatchReader as a child class of CSVFileReader
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/* implementation using interface */
+/* INTERFACE IMPLEMENTATION */
 /* create instance of csv reader, pass it filepath */
 const csvReader = new CSVFileReader_1.CSVFileReader('football.csv');
 /* create instance of MatchReader, pass it data reader */
@@ -50,8 +54,8 @@ const matches = new MatchReader_1.MatchReader(csvReader);
 matches.load();
 /* data is available */
 // console.table(matchReader.data);
-// ^^  NOTE: composition pattern, CSVFileReader satisfies interface 'DataReader'
-//     MatchReader could also accept APIReader, as long as it complies to interface
+// ^^  NOTE: CSVFileReader satisfies interface 'DataReader'
+//     MatchReader could also accept APIReader/HTMLReader, etc, as long as it complies to interface
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // /* IMPERATIVE COUNTER */
 // const imperativeWins = (club: string): number => {
@@ -95,3 +99,11 @@ matches.load();
 // printWins(club, functionalWins);
 // console.timeEnd('Functional time')
 // /* ~0.1ms */
+/* COMPOSITIONAL IMPLEMENTATION */
+const analysis = new WinsAnalysis_1.WinsAnalysis('Leeds');
+const report = new ConsoleReport_1.ConsoleReport();
+const matchData = matches.data;
+const manUtdWins = new Summary_1.Summary(analysis, report);
+console.time('Compositional pattern');
+manUtdWins.buildAndReport(matchData);
+console.timeEnd('Compositional pattern');
