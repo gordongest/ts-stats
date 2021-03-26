@@ -107,6 +107,7 @@ const matchData = matches.data;
 // console.time('Compositional pattern')
 // manUtdWins.buildAndReport(matchData);
 // console.timeEnd('Compositional pattern')
+/* refactored to be more concise */
 const report = (club) => {
     return new Summary_1.Summary(new WinsAnalysis_1.WinsAnalysis(club), new ConsoleReport_1.ConsoleReport());
 };
