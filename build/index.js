@@ -49,9 +49,9 @@ const ConsoleReport_1 = require("./reporters/ConsoleReport");
 /* create instance of csv reader, pass it filepath */
 const csvReader = new CSVFileReader_1.CSVFileReader('football.csv');
 /* create instance of MatchReader, pass it data reader */
-const matches = new MatchReader_1.MatchReader(csvReader);
+const matchReader = new MatchReader_1.MatchReader(csvReader);
 /* call load method */
-matches.load();
+matchReader.load();
 /* data is available */
 // console.table(matchReader.data);
 // ^^  NOTE: CSVFileReader satisfies interface 'DataReader'
@@ -60,7 +60,7 @@ matches.load();
 // /* IMPERATIVE COUNTER */
 // const imperativeWins = (club: string): number => {
 //   let wins = 0;
-//   matches.data.forEach((match): void => {
+//   matchReader.data.forEach((match): void => {
 //     if (match[1] === club && match[5] === MatchResult.HomeWin) {
 //       wins++;
 //     } else if (match[2] === club && match[5] === MatchResult.AwayWin) {
@@ -71,7 +71,7 @@ matches.load();
 // };
 // /* FUNCTIONAL COUNTER */
 // const functionalWins = (club: string): number =>
-//   matches.data.filter((match): boolean => {
+//   matchReader.data.filter((match): boolean => {
 //     return (
 //       (match[1] === club && match[5] === MatchResult.HomeWin) ||
 //       (match[2] === club && match[5] === MatchResult.AwayWin)
@@ -100,9 +100,9 @@ matches.load();
 // console.timeEnd('Functional time')
 // /* ~0.1ms */
 /* COMPOSITIONAL IMPLEMENTATION */
+const matchData = matchReader.data;
 // const analysis = new WinsAnalysis('Leeds');
 // const report = new ConsoleReport();
-const matchData = matches.data;
 // const manUtdWins = new Summary(analysis, report);
 // console.time('Compositional pattern')
 // manUtdWins.buildAndReport(matchData);
