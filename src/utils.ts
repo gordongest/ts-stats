@@ -1,4 +1,4 @@
-export const dateStringToDate = (dateString: string): Date => {
+export const stringToDate = (dateString: string): Date => {
   const dateVals: number[] = dateString
     .split('/')
     .map((value: string): number => {

@@ -59,10 +59,10 @@ import { MatchReader } from './MatchReader';
 const csvReader = new CSVFileReader('football.csv');
 
 /* create instance of MatchReader, pass it data reader */
-const matchReader = new MatchReader(csvReader);
+const matches = new MatchReader(csvReader);
 
 /* call load method */
-matchReader.load();
+matches.load();
 
 /* data is available */
 // console.table(matchReader.data);
@@ -77,7 +77,7 @@ matchReader.load();
 const imperativeWins = (club: string): number => {
   let wins = 0;
 
-  matchReader.data.forEach((match): void => {
+  matches.data.forEach((match): void => {
     if (match[1] === club && match[5] === MatchResult.HomeWin) {
       wins++;
     } else if (match[2] === club && match[5] === MatchResult.AwayWin) {
@@ -88,19 +88,15 @@ const imperativeWins = (club: string): number => {
   return wins;
 };
 
-// console.log('imperative:', imperativeWins('Man United'));
-
 /* FUNCTIONAL COUNTER */
 
 const functionalWins = (club: string): number =>
-  matchReader.data.filter((match): boolean => {
+  matches.data.filter((match): boolean => {
     return (
       (match[1] === club && match[5] === MatchResult.HomeWin) ||
       (match[2] === club && match[5] === MatchResult.AwayWin)
     );
   }).length;
-
-// console.log('functional:', functionalWins('Man United'));
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

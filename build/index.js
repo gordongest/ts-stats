@@ -46,9 +46,9 @@ const MatchReader_1 = require("./MatchReader");
 /* create instance of csv reader, pass it filepath */
 const csvReader = new CSVFileReader_1.CSVFileReader('football.csv');
 /* create instance of MatchReader, pass it data reader */
-const matchReader = new MatchReader_1.MatchReader(csvReader);
+const matches = new MatchReader_1.MatchReader(csvReader);
 /* call load method */
-matchReader.load();
+matches.load();
 /* data is available */
 // console.table(matchReader.data);
 // ^^  NOTE: composition pattern, CSVFileReader satisfies interface 'DataReader'
@@ -57,7 +57,7 @@ matchReader.load();
 /* IMPERATIVE COUNTER */
 const imperativeWins = (club) => {
     let wins = 0;
-    matchReader.data.forEach((match) => {
+    matches.data.forEach((match) => {
         if (match[1] === club && match[5] === MatchResult_1.MatchResult.HomeWin) {
             wins++;
         }
@@ -67,13 +67,11 @@ const imperativeWins = (club) => {
     });
     return wins;
 };
-// console.log('imperative:', imperativeWins('Man United'));
 /* FUNCTIONAL COUNTER */
-const functionalWins = (club) => matchReader.data.filter((match) => {
+const functionalWins = (club) => matches.data.filter((match) => {
     return ((match[1] === club && match[5] === MatchResult_1.MatchResult.HomeWin) ||
         (match[2] === club && match[5] === MatchResult_1.MatchResult.AwayWin));
 }).length;
-// console.log('functional:', functionalWins('Man United'));
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /* redundant after refactor */
 // const clubWins = (club: string): number => functionalWins(club);

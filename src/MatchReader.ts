@@ -1,4 +1,4 @@
-import { dateStringToDate } from './utils';
+import { stringToDate } from './utils';
 import { MatchResult } from './MatchResult';
 
 type MatchData = [Date, string, string, number, number, MatchResult, string];
@@ -19,7 +19,7 @@ export class MatchReader {
     this.data = this.reader.data.map(
       (row: string[]): MatchData => {
         return [
-          dateStringToDate(row[0]),
+          stringToDate(row[0]),
           row[1],
           row[2],
           Number(row[3]),
