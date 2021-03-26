@@ -145,10 +145,10 @@ const matchData = matches.data;
 
 /* refactored to be more concise */
 
-const report = (club: string): Summary => {
+const summary = (club: string): Summary => {
   return new Summary(
     new WinsAnalysis(club),
     new ConsoleReport());
 };
 
-report('Man United').buildAndReport(matchData)
+summary('Liverpool').buildAndReport(matchData)

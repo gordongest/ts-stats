@@ -108,7 +108,7 @@ const matchData = matches.data;
 // manUtdWins.buildAndReport(matchData);
 // console.timeEnd('Compositional pattern')
 /* refactored to be more concise */
-const report = (club) => {
+const summary = (club) => {
     return new Summary_1.Summary(new WinsAnalysis_1.WinsAnalysis(club), new ConsoleReport_1.ConsoleReport());
 };
-report('Man United').buildAndReport(matchData);
+summary('Liverpool').buildAndReport(matchData);
