@@ -4,6 +4,7 @@ import { MatchResult } from './MatchResult';
 import { MatchReader } from './MatchReader';
 
 // /* standard JS implementation */
+
 // const matches = fs
 //   .readFileSync('football.csv', {
 //     encoding: 'utf-8',
@@ -13,26 +14,14 @@ import { MatchReader } from './MatchReader';
 //     return row.split(',');
 //   });
 
-/* implementation using class */
-// const matches = new MatchReader('football.csv');
-// matches.read();
+//  ^^ NOTE: refactored into CSVFileReader class
 
-/* implementation using interface */
-/* create instance of data reader */
-const reader = new CSVFileReader('football.csv');
-/* create instance of MatchReader, pass it data reader */
-const matchReader = new MatchReader(reader);
-matchReader.load();
-console.table(matchReader.data);
-
-// console.table(matches.data);
-
-/* draw variable may be marked as unused and tempting for other engineers to delete */
+// /* draw variable may be marked as unused and tempting for other engineers to delete */
 // const homeWin = 'H';
 // const awayWin = 'A';
 // const draw = 'D';
 
-/* using an object instead preserves information context */
+// /* using an object instead preserves information context */
 // const MatchResult = {
 //   HomeWin: 'H',
 //   AwayWin: 'A',
@@ -46,6 +35,42 @@ console.table(matchReader.data);
 //   AwayWin = 'A',
 //   Draw = 'D'
 // }
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/* implementation using class inheritance */
+
+/* create instance of MatchReader, pass it filepath */
+// const matches = new MatchReader('football.csv');
+
+/* call read method
+// matches.read();
+
+/* data is available */
+// console.log(matches.data)
+
+//  ^^ NOTE: MatchReader as a child class of CSVFileReader
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/* implementation using interface */
+
+/* create instance of csv reader, pass it filepath */
+const csvReader = new CSVFileReader('football.csv');
+
+/* create instance of MatchReader, pass it data reader */
+const matchReader = new MatchReader(csvReader);
+
+/* call load method */
+matchReader.load();
+
+/* data is available */
+console.table(matchReader.data);
+
+// ^^  NOTE: composition pattern, CSVFileReader satisfies interface 'DataReader'
+//     MatchReader could also accept APIReader, as long as it complies to interface
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 let manUtdWins = 0;
 
