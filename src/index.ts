@@ -72,59 +72,59 @@ matches.load();
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/* IMPERATIVE COUNTER */
+// /* IMPERATIVE COUNTER */
 
-const imperativeWins = (club: string): number => {
-  let wins = 0;
+// const imperativeWins = (club: string): number => {
+//   let wins = 0;
 
-  matches.data.forEach((match): void => {
-    if (match[1] === club && match[5] === MatchResult.HomeWin) {
-      wins++;
-    } else if (match[2] === club && match[5] === MatchResult.AwayWin) {
-      wins++;
-    }
-  });
+//   matches.data.forEach((match): void => {
+//     if (match[1] === club && match[5] === MatchResult.HomeWin) {
+//       wins++;
+//     } else if (match[2] === club && match[5] === MatchResult.AwayWin) {
+//       wins++;
+//     }
+//   });
 
-  return wins;
-};
+//   return wins;
+// };
 
-/* FUNCTIONAL COUNTER */
+// /* FUNCTIONAL COUNTER */
 
-const functionalWins = (club: string): number =>
-  matches.data.filter((match): boolean => {
-    return (
-      (match[1] === club && match[5] === MatchResult.HomeWin) ||
-      (match[2] === club && match[5] === MatchResult.AwayWin)
-    );
-  }).length;
+// const functionalWins = (club: string): number =>
+//   matches.data.filter((match): boolean => {
+//     return (
+//       (match[1] === club && match[5] === MatchResult.HomeWin) ||
+//       (match[2] === club && match[5] === MatchResult.AwayWin)
+//     );
+//   }).length;
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/* redundant after refactor */
-// const clubWins = (club: string): number => functionalWins(club);
+// /* redundant after refactor */
+// // const clubWins = (club: string): number => functionalWins(club);
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-const printWins = (
-  club: string,
-  winCounter: (club: string) => number
-): void => {
-  const wins = winCounter(club);
-  console.log(`${club} won ${wins} games`);
-};
+// const printWins = (
+//   club: string,
+//   winCounter: (club: string) => number
+// ): void => {
+//   const wins = winCounter(club);
+//   console.log(`${club} won ${wins} games`);
+// };
 
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-let club: string = 'Man United';
+// let club: string = 'Man United';
 
-console.time('Imperative time')
-printWins(club, imperativeWins);
-console.timeEnd('Imperative time')
-/* ~2.5ms */
+// console.time('Imperative time')
+// printWins(club, imperativeWins);
+// console.timeEnd('Imperative time')
+// /* ~2.5ms */
 
-console.time('Functional time')
-// club = 'Liverpool';
-printWins(club, functionalWins);
-console.timeEnd('Functional time')
-/* ~0.1ms */
+// console.time('Functional time')
+// // club = 'Liverpool';
+// printWins(club, functionalWins);
+// console.timeEnd('Functional time')
+// /* ~0.1ms */
