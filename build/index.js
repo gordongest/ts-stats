@@ -100,10 +100,14 @@ matches.load();
 // console.timeEnd('Functional time')
 // /* ~0.1ms */
 /* COMPOSITIONAL IMPLEMENTATION */
-const analysis = new WinsAnalysis_1.WinsAnalysis('Leeds');
-const report = new ConsoleReport_1.ConsoleReport();
+// const analysis = new WinsAnalysis('Leeds');
+// const report = new ConsoleReport();
 const matchData = matches.data;
-const manUtdWins = new Summary_1.Summary(analysis, report);
-console.time('Compositional pattern');
-manUtdWins.buildAndReport(matchData);
-console.timeEnd('Compositional pattern');
+// const manUtdWins = new Summary(analysis, report);
+// console.time('Compositional pattern')
+// manUtdWins.buildAndReport(matchData);
+// console.timeEnd('Compositional pattern')
+const report = (club) => {
+    return new Summary_1.Summary(new WinsAnalysis_1.WinsAnalysis(club), new ConsoleReport_1.ConsoleReport());
+};
+report('Man United').buildAndReport(matchData);
