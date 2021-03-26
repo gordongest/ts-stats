@@ -75,16 +75,21 @@ const functionalWins = (club) => matchReader.data.filter((match) => {
 }).length;
 // console.log('functional:', functionalWins('Man United'));
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/* redundant after refactor */
+// const clubWins = (club: string): number => functionalWins(club);
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const printWins = (club, winCounter) => {
     const wins = winCounter(club);
     console.log(`${club} won ${wins} games`);
 };
-/* redundant after refactor */
-// const clubWins = (club: string): number => functionalWins(club);
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 let club = 'Man United';
+console.time('Imperative time');
 printWins(club, imperativeWins);
-club = 'Liverpool';
+console.timeEnd('Imperative time');
+/* ~2.5ms */
+console.time('Functional time');
+// club = 'Liverpool';
 printWins(club, functionalWins);
-club = 'Southampton';
-printWins(club, functionalWins);
+console.timeEnd('Functional time');
+/* ~0.1ms */

@@ -104,6 +104,11 @@ const functionalWins = (club: string): number =>
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+/* redundant after refactor */
+// const clubWins = (club: string): number => functionalWins(club);
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 const printWins = (
   club: string,
   winCounter: (club: string) => number
@@ -112,16 +117,18 @@ const printWins = (
   console.log(`${club} won ${wins} games`);
 };
 
-/* redundant after refactor */
-// const clubWins = (club: string): number => functionalWins(club);
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 let club: string = 'Man United';
+
+console.time('Imperative time')
 printWins(club, imperativeWins);
+console.timeEnd('Imperative time')
+/* ~2.5ms */
 
-club = 'Liverpool';
+console.time('Functional time')
+// club = 'Liverpool';
 printWins(club, functionalWins);
-
-club = 'Southampton';
-printWins(club, functionalWins);
+console.timeEnd('Functional time')
+/* ~0.1ms */
